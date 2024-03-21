@@ -82,3 +82,23 @@ CREATE TABLE TB_PROFESSORES (
 );
 
 
+--CRIANDO A TABELA "tb_pessoas"
+create table tb_pessoas(
+codigo INTEGER,
+nm_pessoa VARCHAR(60),
+CONSTRAINT pk_tb_pessoas_codigo PRIMARY KEY(codigo)
+);
+
+--CRIANDO A TABELA "tb_cnh"
+create table tb_cnh(
+nr_cnh INTEGER,
+dt_expedicao DATE,
+validade DATE,
+categoria VARCHAR(5),
+codigo INTEGER CONSTRAINT nn_tb_cnh_codigo NOT NULL --O valor não pode ser nullo
+			   CONSTRAINT uq_tb_cnh_codigo UNIQUE, --Não aceita valores reptidos
+dt_retirada DATE,
+CONSTRAINT pk_tb_cnh_nr PRIMARY KEY(nr_cnh),
+CONSTRAINT fk_tb_cnh_codigo FOREIGN KEY(codigo)
+	REFERENCES tb_pessoas(codigo)
+);
